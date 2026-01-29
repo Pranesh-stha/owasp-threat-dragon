@@ -1238,52 +1238,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": " ",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Allowed (HTTPS)"
-            ],
-            "id": "6dbfb9ff-2804-473d-aef7-322f72bbc609",
-            "source": {
-              "cell": "e155c95a-5832-44b1-baa7-89d9acf1a9ac",
-              "port": "a5550978-f36d-438b-93ec-dd53d37f7029"
-            },
-            "target": {
-              "cell": "f0393cfb-9414-41ec-95b4-1824e9585855",
-              "port": "7b68aced-0299-44c9-aa92-bd331757a6f6"
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Data Flow",
               "description": "",
               "outOfScope": false,
@@ -1497,6 +1451,10 @@
               {
                 "x": 550,
                 "y": -280
+              },
+              {
+                "x": 550,
+                "y": -190
               },
               {
                 "x": 680,
@@ -1750,7 +1708,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1771,13 +1730,45 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "309f8d1f-5fd1-44df-b9a8-412bac1ad84c",
+                  "title": "Credential stuffing / brute-force login attempts",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "An attacker attempts to impersonate users by trying many username/password combinations on the login flow, potentially taking over accounts.",
+                  "mitigation": "Enable MFA, rate limiting, CAPTCHA/bot protection, account lockout after failed attempts, monitor suspicious login patterns.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                },
+                {
+                  "id": "969e6bfc-3226-49d0-b549-c26aa47d1d3b",
+                  "title": "Fake login page / phishing to steal credentials",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Attackers can trick users into entering credentials on a fake NepalMart login page that looks legitimate, then reuse those credentials.",
+                  "mitigation": "Enforce HTTPS + HSTS, educate users, use branded login pages with consistent domain, implement MFA, add phishing-resistant authentication where possible.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 2,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 2,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Browse/Login (HTTPS)"
@@ -1796,7 +1787,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1817,13 +1809,32 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "da2c0d10-18bb-4972-b46c-2eb51b5e938f",
+                  "title": "Malicious payload bypasses WAF rules",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "An attacker crafts requests that evade WAF signatures and reach internal systems, potentially modifying parameters or triggering vulnerabilities.",
+                  "mitigation": "Keep WAF/IPS rules updated, enable anomaly detection rules, perform regular security testing, validate and sanitize inputs in the application layer.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 3,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Filtered (HTTPS)"
@@ -1890,6 +1901,73 @@
                 "y": -310
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": " Allowed (HTTPS)",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "dc0b60e9-299c-45e6-9e9b-a8907fc5b866",
+                  "title": "Denial of Service by traffic flooding",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Denial of service",
+                  "description": "ttacker floods the system with requests so the IPS/LB and downstream servers become overloaded, causing slow service or downtime.",
+                  "mitigation": "DDoS protection, rate limiting, autoscaling, connection throttling at edge/WAF, enable CDN caching where applicable.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1
+              }
+            },
+            "labels": [
+              " Allowed (HTTPS)"
+            ],
+            "id": "6dbfb9ff-2804-473d-aef7-322f72bbc609",
+            "source": {
+              "cell": "e155c95a-5832-44b1-baa7-89d9acf1a9ac",
+              "port": "a5550978-f36d-438b-93ec-dd53d37f7029"
+            },
+            "target": {
+              "cell": "f0393cfb-9414-41ec-95b4-1824e9585855",
+              "port": "7b68aced-0299-44c9-aa92-bd331757a6f6"
+            },
+            "vertices": []
           },
           {
             "position": {
@@ -2020,6 +2098,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 0
+    "threatTop": 4
   }
 }
