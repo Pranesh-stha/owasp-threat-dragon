@@ -1222,7 +1222,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1238,18 +1239,37 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Data Flow",
+              "name": "Forward (HTTPS)",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "39425c72-5076-450e-8fc3-acb6cc43861b",
+                  "title": "Denial of Service by traffic flooding",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "If session cookies are not protected properly, an attacker may steal or replay a session token and access the user’s account.",
+                  "mitigation": "Secure/HttpOnly/SameSite cookies, short session lifetime, session rotation after login, TLS everywhere, detect unusual session activity.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 0,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Forward (HTTPS)"
@@ -1268,7 +1288,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1289,13 +1310,32 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "975e6a61-e9d6-42bc-8322-6763681a6578",
+                  "title": "Broken access control on API endpoints",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "An attacker calls API endpoints directly (e.g., admin functions or other users’ orders) and gains unauthorized access if the API does not enforce authorization correctly.",
+                  "mitigation": "Enforce RBAC/ABAC on every endpoint, server-side authorization checks, deny-by-default, use least privilege roles, security tests for IDOR.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "API calls (HTTPS)"
@@ -1512,7 +1552,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1533,13 +1574,32 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "dbfdcc1d-5dbe-49a4-a64e-17816d1fbeca",
+                  "title": "Tampering with transaction values before fraud check",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Attacker modifies cart total/discount/shipping values in transit (or via parameter tampering) so fraud detection and downstream payment see incorrect amounts.",
+                  "mitigation": "Server-side recalculation of totals, signed price/discount tokens, reject client-supplied totals, integrity checks, logging + alerting.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Transaction (HTTPS)"
@@ -1558,7 +1618,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1579,13 +1640,45 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "2c07ee21-8c1c-434f-81b2-3372ea07a53b",
+                  "title": "SQL injection to exfiltrate or modify database records",
+                  "status": "Open",
+                  "severity": "Critical",
+                  "type": "Information disclosure",
+                  "description": "Malicious input to API can inject SQL queries, exposing PII/orders or modifying data in the database.",
+                  "mitigation": "Parameterized queries/ORM, input validation, least-privilege DB accounts, WAF rules for injection, code review and security testing.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                },
+                {
+                  "id": "4092eaae-9072-4c6d-a968-b81f304cc49e",
+                  "title": "Unauthorized modification of orders/inventory (data tampering)",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Attacker manipulates API requests or exploits weak authorization to change order status, prices, inventory, or shipment data stored in the DB.",
+                  "mitigation": "Strong authorization checks, server-side validation, integrity constraints, audit trails, DB role separation, alerts for suspicious changes.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Read/Write (TLS)"
@@ -1662,7 +1755,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1683,13 +1777,32 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "d07524db-4adb-42d8-8900-b95f179d2d89",
+                  "title": "Payment replay / duplicate charge or token reuse",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Attacker replays a payment approval request or reuses a token to cause duplicate charges or disputes (“I didn’t do it”), creating financial and audit problems.",
+                  "mitigation": "Idempotency keys, nonce/timestamp validation, gateway token expiration, strong audit logs with request IDs, confirmation step and transaction reconciliation.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "Approve/Reject (HTTPS)"
@@ -1781,7 +1894,8 @@
             "target": {
               "cell": "e9d0d4c3-0fce-4a26-afe7-7c28bacf8294",
               "port": "caa84b5a-238e-4032-bfb6-0e5c7662b09a"
-            }
+            },
+            "vertices": []
           },
           {
             "shape": "flow",
@@ -2098,6 +2212,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 4
+    "threatTop": 10
   }
 }
